@@ -1,0 +1,75 @@
+# HTML代码风格
+
+## 基本设置
+
+* 4空格缩进
+* UTF-8 编码
+* 属性统一使用双引号
+* 自定义属性统一使用`data-`，如果属性名有多个单词请使用`-`分隔, 如：`data-foo-bar`
+
+## 声明相关
+
+* 使用`<! DOCTYPE html>`作为唯一的DTD, 理由：简洁且有效。
+* 使用`<meta charset=“UTF-8” />` 指定文件编码, 理由：只设置`charset`即可，不需要 `Content-type`
+* 所有页面必须有`<title>`，并尽可能地在不同页面使用不同标题
+
+## 结构相关
+
+* 尽可能简化HTML结构，复杂结构难以维护
+* 严格遵守标签的嵌套规则，禁止标签出现在不正确的地方
+
+```html
+<!—- 禁止 —->
+<dl>
+	<dt>…</dt>
+	<ul>
+		<li>…</li>
+	</ul>
+</dl>
+<!—- 允许 -—>
+<dl>
+	<dt>…</td>
+	<dd>
+		<ul>
+			<li>…</li>
+		</ul>
+	</dd>
+</dl>
+<!—- 禁止 —->
+<a href=“#”><p>…</p></a>
+<!—- 允许 —->
+<p><a href=“#”>…</a></p>
+```
+
+* 不要省略一些必要属性
+
+```html
+	<!—- 禁止 —->
+	<a></a>
+	<!—- 允许 —->
+	<a href=“javascript:void(0);”></a>
+```
+
+## DOM相关
+
+* 不要在html标签中使用事件属性绑定事件
+
+```html
+	<!—- 禁止 —>
+	<div id="foo" onclick="fun"></div>
+
+        <!-- 统计代码例外 -->
+        <div class="foo" onclick="log('send','click', 'topsiderbar','index' , 'click');"></div>
+
+	<!—- 允许 —->
+	<script>
+		$(‘#foo’).on(‘click’, function(){});
+	</script>
+```
+
+## 其它建议
+
+* 内容图片中alt尽量有内容来描述这个图片
+* 给无没有文字内容的`a`标签添加`title`
+* 禁止放置开发者个人信息的注释
+
