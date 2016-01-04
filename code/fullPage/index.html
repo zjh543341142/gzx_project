@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>使用fullpage实现视觉滚动效果</title>
+	<script type="text/javascript" src="js/fullPage.min.js"></script>
+	<link href="css/index.css" rel="stylesheet" type="text/css" />
+	<script src="js/jquery.1.8.1.js"></script>
+</head>
+<body>
+	<div id="pageContain">
+		<div class="page page1 current" id="page1">
+			<img class="imgStyle" src="img/p16.jpg">
+			<div class="contain pa section">
+				<div class="title1">第一屏</div>
+				<a id="transparent_div1" style="position:absolute;text-align:center;bottom:0px;width: 500px;left:50%;margin-left: -250px;"><img  style="width:28px;height:36px;z-index:5;" src="img/arrow_down.png"></a>			
+			</div>
+		</div>
+
+		<div class="page page2" id="page2">
+			<img class="imgStyle" src="img/p2.jpg">
+			<div class="contain pa section">
+				<div class="section_title">第二屏</div>
+			</div>
+		</div>
+
+		<div class="page page3" id="page3">
+			<img class="imgStyle" src="img/p4.jpg">
+			<div class="contain pa section">
+				<div class="section_title">第三屏</div>
+				<!-- <div class="slide">第三屏的第一屏</div>
+		        <div class="slide">第三屏的第二屏</div>
+		        <div class="slide">第三屏的第三屏</div>
+		        <div class="slide">第三屏的第四屏</div>
+	        	<ul id="navBar1">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul> -->
+			</div>
+		</div>
+
+		<div class="page page4" id="page4">
+			<img class="imgStyle" src="img/p5.jpg">
+			<div class="contain pa section">
+				<div class="section_title">第四屏</div>
+			</div>
+		</div>
+
+		<div class="page page5" id="page5">
+			<img class="imgStyle" src="img/p8.jpg">
+			<div class="contain pa section">
+				<div class="section_title">第五屏</div>
+			</div>
+		</div>
+
+		<div class="page page6" id="page6">
+			<div class="contain pa section">
+				<div class="section_title">第六屏</div>
+			</div>
+		</div>
+	</div>
+
+	<ul id="navBar">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+	<script type="text/javascript">
+		var runPage;
+		runPage = new FullPage({
+			id: 'pageContain',
+			slideTime: 800,
+			effect: {
+				transform: {
+					translate: 'Y'
+				},
+				opacity: [0, 1]
+			},
+			mode: 'wheel, touch, nav:navBar',
+			easing: 'ease',
+			scrollDelay:400
+		});
+
+		$('#transparent_div1').on('click', function(){
+			runPage.next();
+		});
+
+		window.onload=function(){
+			$('#transparent_div1').css({
+				'opacity': 0.5,
+				'display': 'block'
+			}).animate({
+				"opacity": 1
+			}, 2000);
+		}
+
+		setInterval(function(){
+			$('#transparent_div1').animate({'bottom':'25px'},200).animate({'bottom':'5px'},200).animate({'bottom':'15px'},200);	
+		},600);
+
+		//pageup pagedown控制滚动
+		document.onkeydown=function(event){
+			var e = event || window.event || arguments.callee.caller.arguments[0];
+
+			if(e && e.keyCode==38){
+				runPage.prev();
+			}
+
+			if(e && e.keyCode==40 ){
+				runPage.next();
+			}
+		}; 
+	</script>
+</body>
+
+</html>
