@@ -1,0 +1,53 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+	<title>文字向上滚动</title> 
+	<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+	<style type="text/css"> 
+	</style> 
+</head> 
+<body> 
+
+	<script type="text/javascript"> 
+		
+	// 当你需要检查参数个数的有效性的时候，或者当你需要创建一个不确定参数个数的函数的时候，这个技巧是很有用的。
+	function sum_three_nums(){ 
+		if(arguments.length!=3) 
+			alert('received ' + arguments.length + ' parameters and should work with 3'); 
+	} 
+	function sum_num(){ 
+		var total = 0; 
+		for(var i=0;i<arguments .length;i++){ 
+			total+=arguments[i]; 
+		} 
+		return total; 
+	} 
+
+
+	var a = "Hello";
+	function test(){
+		alert(a);
+		a = "World";
+		alert(a);
+	}
+
+	var o = 
+	{
+		key : 'name',
+		value : 'aaa'
+	};
+
+
+	$(function()
+	{
+		//alert(o["name"])
+		//test();
+		sum_three_nums("",o); //Return the error message 
+		//sum_num(2,34,45,56,56); 
+	});
+
+</script>
+</body> 
+</html> 

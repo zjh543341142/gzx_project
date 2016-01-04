@@ -1,0 +1,13 @@
+[ 
+{ 
+	"name":"产品1", 
+	"price":15, 
+	"ico":"../img/product1.jpg" 
+	}, 
+	{ 
+		"name":"产品2", 
+		"price":16, 
+		"ico":"../img/product2.jpg"
+	}
+	] 
+

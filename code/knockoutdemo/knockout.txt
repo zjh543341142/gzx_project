@@ -1,0 +1,28 @@
+﻿http://knockoutjs.com/
+
+MVVM MVP MVC的概念：
+
+MVVM在概念上是真正将页面与数据逻辑分离的模式，在开发方式上，它是真正将前台代码开发者（JS+HTML）与后台代码开发者分离的模式（asp,asp.net,php,jsp）。
+
+MVP 是从经典的模式MVC演变而来，它们的基本思想有相通的地方：Controller/Presenter负责逻辑的处理，Model提供数据，View负 责显示。作为一种新的模式，MVP与MVC有着一个重大的区别：在MVP中View并不直接使用Model，它们之间的通信是通过Presenter (MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，而在MVC中View会从直接Model中读取数据而不是通过 Controller。
+
+MVC里，View是可以直接访问Model的！从而，View里会包含 Model信息，不可避免的还要包括 一些 业务逻辑。 在MVC模型里，更关注的Model的不变，而同时有多个对Model的不同显示，及View。所以，在MVC模型里，Model不依赖于View，但是 View是依赖于Model的。不仅如此，因为有一些业务逻辑在View里实现了，导致要更改View也是比较困难的，至少那些业务逻辑是无法重用的。
+
+Knockoutjs是微软mvc4里一个新东西，用这在MVC环境里实现MVVM。MVVC插件。
+
+1.Knockoutjs--text,value,attr,visible,with的数据绑定
+text绑定：你可以为p,span,div,td等标记去加这个text元素
+value绑定：你可以为input标记加value元素
+attr绑定：你可以为标记动态添加它们的属性，如<a>标签的href,title,<img>标签的src,alt等等
+visible绑定：可以动态显示或隐藏指定的标记，true值为显示，false值为隐藏
+with绑定：可以绑定一个对象，然后在内部标记里就可以访问对象的属性了
+
+2.Knockoutjs--对象与对象组合
+JS里对象可以使用{}生成，也可以使用function(){}方式生成.
+在Knockoutjs里的viewmodel，即页面数据绑定源，就是一个对象，它也完全支持{}和function(){}两种方式
+
+3.Knockoutjs--验证机制
+knockout.validation.js，用它来实现对HTML标记的验证,支持override
+
+4.Knockoutjs--级联select
+在knockoutjs里，是以数据绑定为中心的，而数据是以面向对象为前提的，而对于级联绑定来说，它也是一种面向对象里关系对象的体现，有了关系对象，就可以把级联很容易的开发出来，而不用像之前JS那么麻烦了。
