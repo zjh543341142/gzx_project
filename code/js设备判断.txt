@@ -1,0 +1,20 @@
+≈–∂œ…Ë±∏android,weixin,ios
+
+var UserAgent=navigator.userAgent.toLowerCase();
+var IS_ANDROID=false;
+var IS_IOS=false;
+var IS_WEIXIN=false;
+var rootDomain = window.root_domain;
+var CHOOSE_SCHOOL_URL="http://www."+rootDomain+"/chooseSchool/oneKeyRecommend.do?callBack=?";
+
+if(UserAgent.match(/ipad/i) == "ipad"||UserAgent.match(/iphone os/i)) {
+IS_IOS=true;
+}
+if(UserAgent.match(/android/i) == "android")
+{
+IS_ANDROID=true;
+}
+if(UserAgent.match(/MicroMessenger/i)=="micromessenger")
+{
+IS_WEIXIN=true;
+}
