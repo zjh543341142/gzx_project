@@ -1,0 +1,423 @@
+# JavaScript 代码风格
+
+## 基本设置
+
+* 4 空格缩进
+* UTF-8 编码
+
+## 严格模式
+
+建议打开严格模式
+
+```javascript
+	'use strict';
+```
+
+## 引号
+
+使用单引号，这样可以跟 HTML 的双引号更好的工作
+
+## 分号
+
+在语句 （Statement）的结尾加分号
+
+```javascript
+	// 不建议
+	var fn = functon(){
+		// do something
+	}// 没有分号
+	
+	// 建议
+	var fu = function(){
+		// do something
+	}; // 这里有分号
+	
+```
+
+以防万一，在可能有坑的地方手工加分号 [IIFE](http://blog.csdn.net/ebw123/article/details/42428451)
+
+```javascript
+	var f1 = function ff1(){
+		return function(){
+			return 1;
+		};
+	} // 此处漏写分号
+	(function(){ // 此处调用了上面的ff1
+	})();
+	console.log(f1); // 1
+	
+	var f2 = function ff2() {
+	  return function() {
+	    return 1;
+	  };
+	} // 此处漏写分号
+	// IIFE
+	;(function() { // 注意前面的分号
+	})();
+	console.log(f2); // function
+
+```
+
+或者使用`void function(){}()` 的写法
+
+## 空白与格式
+
+在二元和三元运算符的符号与操作数之间添加空格，在非行末的`,` `;` `}` 后添加空格，在 `{` 前添加空格。并在每个逻辑块中间添加空白行，特别的，在 if、while 等券字后加空格，与函数调用做区分
+
+```javascript
+	// 不推荐
+	var foo='bar',hello=foo+2,test=true;
+	function hi(){
+	  // ...
+	}
+	if(foo&&hello){
+	  // ...
+	}else if(foo){
+	  // ...
+	}else if(! test){
+	  // ...
+	}
+	
+	// 推荐
+	var foo = 'bar';
+	var hello = foo + 2;
+	var test = true;
+	
+	function hi(arg1, arg2) {
+	  // ...
+	}
+	
+	if (foo && hello) {
+	  // ...
+	} else if (foo) {
+	  // ...
+	} else if (!test) {
+	  // ...
+	}
+```
+
+## 注释
+
+使用 `//` 作为注释符， 可以使用 `/* */` 作为多行注释符。注释符号与注释内容之间留空，注释的位置尽量放在代码之上：
+
+
+```javascript
+
+	/*不推荐*/
+	//不推荐
+	; // 不推荐
+	
+	/* 推荐 */
+	// 推荐
+	;
+
+```
+
+在需要今后完善的代码中注释以 `// TODO:` 开头
+不要在代码的开头使用开发者自己个性的注释
+不要把无用或自己随意注释的代码留在代码中
+
+不要为大括号另开一行
+
+```javascript
+	// 不推荐
+	if (foo)
+	{
+	  // ...
+	}
+	
+	// 推荐
+	if (foo) {
+	  // ...
+	}
+	
+	// 不允许
+	return
+	{
+	  a: 1
+	};
+	
+	// 一定要
+	return {
+	  a: 1
+	};
+```
+
+写 `else` 时不要另起一行
+
+```javascript
+	// 不推荐
+	if (test) {
+	  things1();
+	  things2();
+	}
+	else {
+	  things3();
+	}
+	
+	// 推荐
+	if (test) {
+	  things1();
+	  things2();
+	} else {
+	  things3();
+	}
+```
+
+## var 语句
+
+### 如果变量有初始赋值则使用单独的 `var` :
+
+```javascript
+	// 不推荐
+	var hello = 1, world = 2;
+	
+	// 推荐
+	var hello = 1;
+	var world = 2;
+	var foo, fee, fxx;
+```
+### 变量的命名
+
+使用以小写字母开头的驼峰命名 （cameICase）法：
+
+```javascript
+	// 不推荐
+	var foo_bar = 'hello eleme';
+	
+	// 推荐
+	var fooBar = 'hello eleme';
+```
+
+### 常量大写
+
+```javascript
+	// 不推荐
+	var prefix = 'http://api.ele.me/v1/';
+	var Prefix = 'http://api.ele.me/v1/'
+	
+	// 推荐
+	var PREFIX = 'http://api.ele.me/v1/';
+```
+
+### 使用字面量
+
+```javascript
+	// 不建议
+	var obj = new Object();
+	var array = new Array();
+	
+	// 推荐
+	var obj = {};
+	var array = [];
+	
+	// 鉴于 Array 构造函数的特殊性，不建议
+	var arr1 = new Array(4, 5, 6); // [4, 5, 6]
+	
+	// 以免与下面混淆
+	var arr2 = new Array(4); // [ undefined * 4 ]
+	// 等价于（不推荐）
+	var arr3 = [];
+	arr3.length = 4;
+	// 等价于（不推荐）
+	var arr4 = [,,,,];
+	console.log('0' in arr2, '0' in arr3, '0' in arr4); // false, false, false
+	
+	// 不推荐
+	var str = new String('str');
+	console.log(str === 'str'); // false
+	
+	var bool = new Boolean(false);
+	if (bool) console.log('wat'); // wat
+	
+	// 当真需要使用字面量包装类时，使用显式强制转换（请先三思）
+	var strObject = Object('str');
+	strObject.customProperty = someValue;
+```
+
+### 比较
+
+```javascript
+	// 不推荐
+	function foo(a) {
+	  if (a == 123) {
+	    // ...
+	  }
+	}
+	
+	// 推荐
+	function foo(a) {
+	  a = Number(a);
+	  if (a === 123) {
+	    // ...
+	  }
+	}
+```
+
+## 避免无必要的 if 语句、三元运算符
+
+```javascript
+	var arr = [1, 2, 3];
+	
+	// 不推荐
+	var flag1 = arr.length > 0 ? true : false;
+	
+	// 不推荐
+	var flag2;
+	if (arr.length > 0) {
+	  flag2 = true;
+	} else {
+	  flag2 = false;
+	}
+	
+	// 推荐
+	var flag3 = arr.length > 0;
+```
+
+
+## 函数定义
+
+因为函数语句是在进入作用域时声明，当在函数内部中，破坏了程序从上到下的执行顺序。可能出现定义在 `return` 后的情况。
+
+```js
+void function() {
+  // 此处可以正常使用函数，但逻辑不清晰
+  foo();
+
+  return null;
+
+  function foo() {};
+}();
+
+```
+
+只引用一次的函数建议匿名定义，因为名称存在主观因素。
+
+```js
+// 不推荐
+var foo = function() {
+  // ...
+};
+element.onclick = foo;
+
+// 推荐
+element.onclick = function() {
+  // ...
+};
+```
+
+### 自执行函数
+
+```js
+// 不推荐
+(function() {
+  // ...
+})();
+
++function() {
+  // ...
+}();
+
+// 推荐
+~function() {
+  // ...
+}();
+
+// 推荐
+void function() {
+  // ...
+}();
+```
+
+括号和加号不是上下文无关的，可能受到上文缺分号的影响而出现奇怪的问题，这些问题甚至不会报错，极难调试，所以不推荐此种用法，比如：
+
+```js
+var a = 1 // 此处无分号
+
++function() {
+  return 2
+}();
+
+// 此处 a 的值为 3
+```
+
+### 避免嵌套过深
+
+可以使用 `Promise` 解决深层嵌套问题：
+
+```js
+// 不推荐
+async1(function() {
+  // TODO 1
+  async2(function() {
+    // TODO 2
+    async3(function() {
+      // TODO 3
+    });
+  });
+});
+
+// 推荐
+Promise.resolve()
+  .then(function() {
+    return new Promise(function(resolve) {
+      async1(resolve);
+    });
+  })
+  .then(function() {
+    // TODO 1
+    return new Promise(function(resolve) {
+      async2(resolve);
+    });
+  })
+  .then(function() {
+    // TODO 2
+    return new Promise(function(resolve) {
+      async3(resolve);
+    });
+  })
+  .then(function() {
+    // TODO 3
+  });
+```
+
+### 禁止事项
+
+* 禁止使用未定义的变量
+* 禁止使用 `eval`，非用不可时可以使用 `Function` 构造器替代。
+* 禁止使用 `with` 语句。
+* 禁止在块作用域中使用函数声明语句。
+
+```js
+if (true) {
+  // 禁止
+  function func1() {
+    // ...
+  }
+  // 允许
+  var func2 = function() {
+    // ...
+  };
+}
+```
+
+* 禁止使用 8 进制词法
+
+```js
+// true
+if (010 === 8);
+```
+
+* 禁止使用 `arguments` 映射
+
+```js
+void function(a) {
+  arguments[0]++;
+  // 此处 a 为 2
+}(1);
+```
+
+* 禁止使用重名参数
+* 禁止使用保留字做变量名如 `interface` 等
+
+

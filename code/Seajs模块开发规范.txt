@@ -1,0 +1,56 @@
+# seajs 模块开发规范
+
+## 基本设置
+
+* 4 空格缩进
+* UTF-8 编码
+
+## 模块ID
+
+除了非公司内部开发（不带有构建工具）的模块有手动定义好的模块ID外，其它模块统一通过构建工具生成标准的 `CMD` 模块ID
+
+## 模块结构
+
+```javascript
+
+	define(function (require, exports, module) {
+			
+			'use strict'; // 需要开启严格模式
+			
+			// 以下为通用模块
+			var $ = require('jquery');
+			var handlebars = requrie('handlebars');
+			
+			// 以下为jquery插件引用
+			require('bxslider');
+			
+			// 模块名
+			var foo = exports;
+			
+			// 一些全局变量
+			var GLOBAL_PARAM_NAME = 'bar';
+			
+			// 模块的方法
+			foo.bar = function(){
+				return say(GLOBAL_PARAM_NAME);
+			};
+			
+			// 内部方法
+			function say(msg){
+				console.log(msg);
+			}
+			
+			/*
+				如果模块是一个构造器需要在这里导出
+				module.exports = Foo;
+			*/
+	}
+	
+```
+
+## 模块的命名
+
+如果模块提供接口的方式，则模块名使用小驼峰的方式。如果模块导出构造器，那模块名称请使用大驼峰写发。
+
+页面级的模块请使用main.js来命名，它用来做为这个页面的入口文件。
+
